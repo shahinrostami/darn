@@ -1,0 +1,11 @@
+[package]
+name = "darn"
+version = "0.1.0"
+authors = ["Dr. Shahin Rostami <hello@shahinrostami.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+plotly = "0.4.0"
+nanoid = "0.3.0"
