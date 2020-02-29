@@ -3,6 +3,10 @@ name = "darn"
 version = "0.1.0"
 authors = ["Dr. Shahin Rostami <hello@shahinrostami.com>"]
 edition = "2018"
+description = "Extras for the Book on Data Analysis with Rust Notebooks"
+homepage = "https://store.shahinrostami.com/product/data-analysis-with-rust-notebooks/"
+license = "MIT"
+repository = "https://github.com/shahinrostami/darn"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
