@@ -1,9 +1,13 @@
 extern crate plotly;
 extern crate nanoid;
+extern crate ndarray;
 
 use plotly::Plot;
 use nanoid::nanoid;
 use std::fs;
+use std::fmt::Debug;
+use ndarray::prelude::*;
+
 
 /// Outputs Inline Plotly Plot for Jupyter
 pub fn show_plot(plot: Plot) {
@@ -99,4 +103,20 @@ pub fn show_plot(plot: Plot) {
                            'caxis': {'gridcolor': 'white', 'linecolor': 'white', 'ticks': ''}},
                'title': {'x': 0.05},")
     ));
+}
+
+pub fn show_array<T: Debug>(values: &Array2<T>) {
+    let mut html = String::new();
+    html.push_str("<table>");
+    for r in 0..(values.shape()[0]) {
+        html.push_str("<tr>");
+        for c in 0..values.shape()[1] {
+            html.push_str("<td>");
+            html.push_str(&format!("{:?}", values[[r, c]]));
+            html.push_str("</td>");
+        }
+        html.push_str("</tr>");            
+    }
+    html.push_str("</table>");
+    println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT", html);
 }

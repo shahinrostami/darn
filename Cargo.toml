@@ -13,3 +13,4 @@ repository = "https://github.com/shahinrostami/darn"
 [dependencies]
 plotly = "0.4.0"
 nanoid = "0.3.0"
+ndarray = "0.13.0"
