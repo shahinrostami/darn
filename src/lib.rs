@@ -121,7 +121,7 @@ pub fn show_array<T: Debug>(values: &Array2<T>) {
     println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT", html);
 }
 
-pub fn show_frame<T: Debug>(values: &Array2<T>, headers: Option<&Vec<&str>>) {
+pub fn show_frame<T: Debug>(values: &Array2<T>, headers: Option<&Vec<String>>) {
     let mut html = String::new();
     html.push_str("<table>");
     
@@ -129,7 +129,7 @@ pub fn show_frame<T: Debug>(values: &Array2<T>, headers: Option<&Vec<&str>>) {
         html.push_str("<thead><tr style=\"text-align: right;\">"); 
         for c in 0..x.len() {
             html.push_str("<th>");
-            html.push_str(x[c]);
+            html.push_str(&x[c]);
             html.push_str("</th>");
         }
         html.push_str("</tr></thead>");
