@@ -120,3 +120,62 @@ pub fn show_array<T: Debug>(values: &Array2<T>) {
     html.push_str("</table>");
     println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT", html);
 }
+
+pub fn show_frame<T: Debug>(values: &Array2<T>, headers: Option<Vec<&str>>) {
+    let mut html = String::new();
+    html.push_str("<table>");
+    
+    if let Some(x) = headers {
+        html.push_str("<thead><tr style=\"text-align: right;\">"); 
+        for c in 0..x.len() {
+            html.push_str("<th>");
+            html.push_str(x[c]);
+            html.push_str("</th>");
+        }
+        html.push_str("</tr></thead>");
+    }
+    
+    html.push_str("<tbody>"); 
+    if values.shape()[0] <= 11 {         
+        for r in 0..(values.shape()[0]) {
+            html.push_str("<tr>");
+            for c in 0..values.shape()[1] {
+                html.push_str("<td>");
+                html.push_str(&format!("{:?}", values[[r, c]]));
+                html.push_str("</td>");
+            }
+            html.push_str("</tr>");            
+        }
+    } else {          
+        for r in 0..5 {
+            html.push_str("<tr>");
+            for c in 0..values.shape()[1] {
+                html.push_str("<td>");
+                html.push_str(&format!("{:?}", values.slice(s![0..5, ..])[[r, c]]));
+                html.push_str("</td>");
+            }
+            html.push_str("</tr>");            
+        }
+
+        html.push_str("<tr>");
+        for c in 0..values.shape()[1] {
+            html.push_str("<td>");
+            html.push_str(&format!("..."));
+            html.push_str("</td>");
+        }
+        html.push_str("</tr>");   
+
+        for r in 0..5 {
+            html.push_str("<tr>");
+            for c in 0..values.shape()[1] {
+                html.push_str("<td>");
+                html.push_str(&format!("{:?}", values.slice(s![-5.., ..])[[r, c]]));
+                html.push_str("</td>");
+            }
+            html.push_str("</tr>");            
+        }       
+    }
+    html.push_str("</tbody>");
+    html.push_str("</table>");
+    println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT", html);
+}
