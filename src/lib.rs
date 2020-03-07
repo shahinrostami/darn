@@ -121,7 +121,7 @@ pub fn show_array<T: Debug>(values: &Array2<T>) {
     println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT", html);
 }
 
-pub fn show_frame<T: Debug>(values: &Array2<T>, headers: Option<Vec<String>>) {
+pub fn show_frame<T: Debug>(values: &Array2<T>, headers: Option<Vec<&str>>) {
     let mut html = String::new();
     html.push_str("<table>");
     
