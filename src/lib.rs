@@ -129,7 +129,7 @@ pub fn show_frame<T: Debug>(values: &Array2<T>, headers: Option<Vec<String>>) {
         html.push_str("<thead><tr style=\"text-align: right;\">"); 
         for c in 0..x.len() {
             html.push_str("<th>");
-            html.push_str(&x[c]);
+            html.push_str(x[c]);
             html.push_str("</th>");
         }
         html.push_str("</tr></thead>");
