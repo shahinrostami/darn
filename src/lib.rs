@@ -183,8 +183,10 @@ pub fn show_frame<T: Debug>(values: &Array2<T>, headers: Option<&Vec<String>>) {
 use std::io::prelude::*;
 use ndarray_csv::Array2Reader;
 use itertools::Itertools;
+use std::str::FromStr;
 
-pub fn iris() -> Array2<String> {
+
+pub fn iris_raw() -> (Array2<String>, Vec<String>) {
     let file_name = "Iris.csv";
 
     let res = ureq::get("https://shahinrostami.com/datasets/Iris.csv").call().into_string().unwrap();
@@ -200,11 +202,27 @@ pub fn iris() -> Array2<String> {
         headers.push(String::from(element));
     };
 
-    data
+    (data, headers)
 }
 
+pub fn iris_typed() -> (Array2::<f32>, Vec<String>, Array1::<String>)
+{
+let raw_iris = iris_raw();
+let data = raw_iris.0;
+let headers = raw_iris.1;
 
-pub fn main(){
-println!("hi");
+let mut features: Array2::<f32> =  Array2::<f32>::zeros((data.shape()[0],0));
+
+for &f in [1, 2, 3, 4].iter() {
+    features = ndarray::stack![Axis(1), features,
+        data.column(f as usize)
+            .mapv(|elem| f32::from_str(&elem).unwrap())
+            .insert_axis(Axis(1))];
+};
+
+let feature_headers = headers[1..5].to_vec();
+let labels: Array1::<String> = data.column(5).to_owned();
+
+(features, feature_headers, labels)
 }
 
