@@ -186,7 +186,7 @@ use itertools::Itertools;
 use std::str::FromStr;
 
 
-pub fn loadcsv_from_url(url : &str) -> (Array2<String>, Vec<String>) {
+pub fn read_csv(url : &str) -> (Array2<String>, Vec<String>) {
     let file_name = "temp.csv";
 
     let res = ureq::get(url).call().into_string().unwrap();
