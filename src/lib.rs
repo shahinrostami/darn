@@ -186,6 +186,25 @@ use itertools::Itertools;
 use std::str::FromStr;
 
 
+pub fn loadcsv_from_url(url : &str) -> (Array2<String>, Vec<String>) {
+    let file_name = "temp.csv";
+
+    let res = ureq::get(url).call().into_string().unwrap();
+
+    let mut file = fs::File::create(file_name).unwrap();
+    file.write_all(res.as_bytes());
+    let mut rdr = csv::Reader::from_path(file_name).unwrap();
+    fs::remove_file(file_name).unwrap();
+
+    let data: Array2<String>= rdr.deserialize_array2_dynamic().unwrap();
+    let mut headers : Vec<String> = Vec::new();
+    for element in rdr.headers().unwrap().into_iter() {
+        headers.push(String::from(element));
+    };
+
+    (data, headers)
+}
+
 pub fn iris_raw() -> (Array2<String>, Vec<String>) {
     let file_name = "Iris.csv";
 
