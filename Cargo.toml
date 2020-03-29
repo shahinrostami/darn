@@ -1,6 +1,6 @@
 [package]
 name = "darn"
-version = "0.1.7"
+version = "0.1.8"
 authors = ["Dr. Shahin Rostami <hello@shahinrostami.com>"]
 edition = "2018"
 description = "Extras for the Book on Data Analysis with Rust Notebooks"
@@ -14,3 +14,7 @@ repository = "https://github.com/shahinrostami/darn"
 plotly = "0.4.0"
 nanoid = "0.3.0"
 ndarray = "0.13.0"
+ureq = "0.11.4"
+csv = "1.1.3"
+ndarray-csv ="0.4.1"
+itertools = "0.9.0"

@@ -179,3 +179,32 @@ pub fn show_frame<T: Debug>(values: &Array2<T>, headers: Option<&Vec<String>>) {
     html.push_str("</table>");
     println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT", html);
 }
+
+use std::io::prelude::*;
+use ndarray_csv::Array2Reader;
+use itertools::Itertools;
+
+pub fn iris() -> Array2<String> {
+    let file_name = "Iris.csv";
+
+    let res = ureq::get("https://shahinrostami.com/datasets/Iris.csv").call().into_string().unwrap();
+
+    let mut file = fs::File::create(file_name).unwrap();
+    file.write_all(res.as_bytes());
+    let mut rdr = csv::Reader::from_path(file_name).unwrap();
+    fs::remove_file(file_name).unwrap();
+
+    let data: Array2<String>= rdr.deserialize_array2_dynamic().unwrap();
+    let mut headers : Vec<String> = Vec::new();
+    for element in rdr.headers().unwrap().into_iter() {
+        headers.push(String::from(element));
+    };
+
+    data
+}
+
+
+pub fn main(){
+println!("hi");
+}
+
