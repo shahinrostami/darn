@@ -30,6 +30,8 @@ pub fn show_plot(plot: Plot) {
     format!("<div>{}</div>",
         &plotly_contents[start_bytes..end_bytes]
         .replace("plotly-html-element", Box::leak(nanoid!().into_boxed_str()))
+        .replace("window.PLOTLYENV=","require([\"plotly\"], function(Plotly) { window.PLOTLYENV=")
+        .replace("};\n\n\n    </script>","};\n\n\n});    </script>")
         .replace("height:100%; width:100%;", "min-height:450px; width:100%;")
         .replace("var layout = {", "var layout = {
             'annotationdefaults': {'arrowcolor': '#2a3f5f', 'arrowhead': 0, 'arrowwidth': 1},
