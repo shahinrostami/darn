@@ -18,13 +18,14 @@ pub fn show_plot(plot: Plot) {
     fs::remove_file(plotly_file);
 
     let start_bytes = plotly_contents
-        .find("<div id='plotly-html-element' class='plotly-graph-div'")
+        .find("<div id=\"plotly-html-element\" class=\"plotly-graph-div\"")
         .unwrap_or(0);
     
     let end_bytes = plotly_contents
         .find("\n</div>\n</body>\n</html>")
         .unwrap_or(plotly_contents.len());
     
+
     println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT",
     format!("<div>{}</div>",
         &plotly_contents[start_bytes..end_bytes]
