@@ -29,8 +29,8 @@ pub fn show_plot(plot: Plot) {
     format!("<div>{}</div>",
         &plotly_contents[start_bytes..end_bytes]
         .replace("plotly-html-element", Box::leak(nanoid!().into_boxed_str()))
+        .replace("height:100%; width:100%;", "min-height:450px; width:100%;")
         .replace("var layout = {", "var layout = {
-            'autosize': true,
             'annotationdefaults': {'arrowcolor': '#2a3f5f', 'arrowhead': 0, 'arrowwidth': 1},
                'colorscale': {'diverging': [[0, '#8e0152'], [0.1, '#c51b7d'],
                                             [0.2, '#de77ae'], [0.3, '#f1b6da'],
