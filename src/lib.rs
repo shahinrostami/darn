@@ -30,8 +30,6 @@ pub fn show_plot(plot: Plot) {
     format!("<div>{}</div>",
         &plotly_contents[start_bytes..end_bytes]
         .replace("plotly-html-element", Box::leak(nanoid!().into_boxed_str()))
-        .replace("window.PLOTLYENV=","require([\"plotly\"], function(Plotly) { window.PLOTLYENV=")
-        .replace("};\n\n\n    </script>","};\n\n\n});    </script>")
         .replace("height:100%; width:100%;", "min-height:450px; width:100%;")
         .replace("var layout = {", "var layout = {
             'annotationdefaults': {'arrowcolor': '#2a3f5f', 'arrowhead': 0, 'arrowwidth': 1},
@@ -213,7 +211,7 @@ pub fn read_csv(url : &str) -> (Array2<String>, Vec<String>) {
 pub fn iris_raw() -> (Array2<String>, Vec<String>) {
     let file_name = "Iris.csv";
 
-    let res = ureq::get("https://shahinrostami.com/datasets/Iris.csv").call().into_string().unwrap();
+    let res = ureq::get("https://datacrayon.com/datasets/Iris.csv").call().into_string().unwrap();
 
     let mut file = fs::File::create(file_name).unwrap();
     file.write_all(res.as_bytes());

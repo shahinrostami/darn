@@ -1,10 +1,10 @@
 [package]
 name = "darn"
-version = "0.1.15"
+version = "0.2.0"
 authors = ["Dr. Shahin Rostami <hello@shahinrostami.com>"]
 edition = "2018"
 description = "Extras for the Book on Data Analysis with Rust Notebooks"
-homepage = "https://store.shahinrostami.com/product/data-analysis-with-rust-notebooks/"
+homepage = "https://datacrayon.com/shop/product/data-analysis-with-rust-notebooks/"
 license = "MIT"
 repository = "https://github.com/shahinrostami/darn"
 
@@ -13,7 +13,7 @@ repository = "https://github.com/shahinrostami/darn"
 [dependencies]
 plotly = "0.4.0"
 nanoid = "0.3.0"
-ndarray = "0.13.0"
+ndarray = "0.13.1"
 ureq = "0.11.4"
 csv = "1.1.3"
 ndarray-csv ="0.4.1"
