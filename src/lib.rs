@@ -24,11 +24,20 @@ pub fn show_plot(plot: Plot) {
     let end_bytes = plotly_contents
         .find("\n</div>\n</body>\n</html>")
         .unwrap_or(plotly_contents.len());
-    
 
     println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT",
     format!("<div>{}</div>",
         &plotly_contents[start_bytes..end_bytes]
+        .replace("plotly-html-element", Box::leak(nanoid!().into_boxed_str()))
+        .replace("window.PLOTLYENV=",
+                    "function show_plot() { window.PLOTLYENV=")
+        .replace("};\n\n\n    </script>",
+                    "};\n\n\n}; if (typeof Plotly === \"undefined\"){
+            var script = document.createElement(\"script\");
+            script.type = \"text/javascript\";
+            script.src = \"https://cdn.plot.ly/plotly-1.58.1.min.js\";
+            script.onload = function () { show_plot() };
+            document.body.appendChild(script);} else { show_plot() }</script>")
         .replace("plotly-html-element", Box::leak(nanoid!().into_boxed_str()))
         .replace("height:100%; width:100%;", "min-height:450px; width:100%;")
         .replace("var layout = {", "var layout = {

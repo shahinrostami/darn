@@ -1,6 +1,6 @@
 [package]
 name = "darn"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Dr. Shahin Rostami <hello@shahinrostami.com>"]
 edition = "2018"
 description = "Extras for the Book on Data Analysis with Rust Notebooks"

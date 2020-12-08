@@ -170,10 +170,10 @@ dependencies = [
 
 [[package]]
 name = "darn"
-version = "0.1.15"
+version = "0.2.0"
 dependencies = [
  "csv",
- "itertools 0.9.0",
+ "itertools",
  "nanoid",
  "ndarray",
  "ndarray-csv",
@@ -230,15 +230,6 @@ dependencies = [
  "matches",
  "unicode-bidi",
  "unicode-normalization",
-]
-
-[[package]]
-name = "itertools"
-version = "0.8.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f56a2d0bc861f9165be4eb3442afd3c236d8a98afd426f65d92324ae1091a484"
-dependencies = [
- "either",
 ]
 
 [[package]]
@@ -318,11 +309,10 @@ dependencies = [
 
 [[package]]
 name = "ndarray"
-version = "0.13.0"
+version = "0.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "25b001fc2f5df269365fb77bd8396ce6b1f61c9848f7f088c25e57494bacc57b"
+checksum = "ac06db03ec2f46ee0ecdca1a1c34a99c0d188a0d83439b84bf0cb4b386e4ab09"
 dependencies = [
- "itertools 0.8.2",
  "matrixmultiply",
  "num-complex",
  "num-integer",
