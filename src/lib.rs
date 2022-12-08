@@ -25,10 +25,14 @@ pub fn show_plot(plot: Plot) {
         .find("\n</div>\n</body>\n</html>")
         .unwrap_or(plotly_contents.len());
 
+    let plot_id = Box::leak(nanoid!().into_boxed_str());
+    
+    let plot_handle = format!("{}{}", "show_plot_", plot_id);
+    
     println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT",
     format!("<div>{}</div>",
         &plotly_contents[start_bytes..end_bytes]
-        .replace("plotly-html-element", Box::leak(nanoid!().into_boxed_str()))
+        .replace("plotly-html-element", plot_id)
         .replace("window.PLOTLYENV=",
                     "function show_plot() { window.PLOTLYENV=")
         .replace("};\n\n\n    </script>",
@@ -38,7 +42,8 @@ pub fn show_plot(plot: Plot) {
             script.src = \"https://cdn.plot.ly/plotly-1.58.1.min.js\";
             script.onload = function () { show_plot() };
             document.body.appendChild(script);} else { show_plot() }</script>")
-        .replace("plotly-html-element", Box::leak(nanoid!().into_boxed_str()))
+        .replace("show_plot", &plot_handle)
+        .replace("plotly-html-element", plot_id)
         .replace("height:100%; width:100%;", "")
         .replace(",height:0,width:0", "")
         .replace("height:0,width:0", "")
