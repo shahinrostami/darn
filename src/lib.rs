@@ -40,6 +40,8 @@ pub fn show_plot(plot: Plot) {
             document.body.appendChild(script);} else { show_plot() }</script>")
         .replace("plotly-html-element", Box::leak(nanoid!().into_boxed_str()))
         .replace("height:100%; width:100%;", "")
+        .replace(",height:0,width:0", "")
+        .replace("height:0,width:0", "")
         .replace("var layout = {", "var layout = {
             'annotationdefaults': {'arrowcolor': '#2a3f5f', 'arrowhead': 0, 'arrowwidth': 1},
                'colorscale': {'diverging': [[0, '#8e0152'], [0.1, '#c51b7d'],
