@@ -172,7 +172,7 @@ dependencies = [
 
 [[package]]
 name = "darn"
-version = "0.3.2"
+version = "0.3.3"
 dependencies = [
  "csv",
  "itertools",
