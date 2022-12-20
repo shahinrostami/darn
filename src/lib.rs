@@ -27,7 +27,7 @@ pub fn show_plot(plot: Plot) {
 
     let plot_id = Box::leak(nanoid!().into_boxed_str());
     
-    let plot_handle = format!("{}{}", "show_plot_", plot_id);
+    let plot_handle = format!("{}{}", "show_plot_", plot_id).replace("-","_");
     
     println!("EVCXR_BEGIN_CONTENT text/html\n{}\nEVCXR_END_CONTENT",
     format!("<div>{}</div>",
